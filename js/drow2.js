@@ -1,52 +1,43 @@
+let sizeCiracle=35;
+let distx=80;
+let disty=70;
+
+
 var svg = new SVG(document.querySelector(".graph")).size("100%",1000);
 
-
 var nodes = svg.group();
-
 var links = svg.group();
-
-
 var markers = svg.group();
-
-
 const shapes = [];
-
-
 let index = 0;
-
 let shape;
-
 let pointsArray = Array();
-
 let idG;
 
+drowNods(distx,disty,sizeCiracle);
 
-drowNods();
+drowNodeCollering(nodes,distx,disty,sizeCiracle);
 
-drowNodeCollering(nodes);
-
-
-function drowNods() {
+function drowNods(distx,disty,sizeCiracle) {
     x = 0;
     y = 0;
 
-    for (let i = 0; i < 13; i++) {
+    for (let i = 1; i <= 13; i++) {
 
-        for (let i2 = 0; i2 < 13; i2++) {
+        for (let j = 1; j <= 13; j++) {
+
             var g = nodes.group().translate(x, y);
-
-            g.circle(35).fill("#437b11");
-            $("#" + g).addClass("g-node");
-            $("#" + g).attr("x", i);
-            $("#" + g).attr("y", i2);
-            y += 140;
+                    g.circle(sizeCiracle).fill("#437b11");
+                    $("#" + g).addClass("g-node");
+                    $("#" + g).attr("x", i);
+                    $("#" + g).attr("y", j);
+                    y += disty;
         }
+
         y = 0;
-        x += 150;
+        x += distx;
     }
 }
-
-
 
 const getDrawObject = () => {
     shape = "mouse paint";
@@ -70,7 +61,7 @@ const getDrawObject = () => {
 
 
 
-$("#drawing >> g[x]").mousedown(function() {
+$("#drawing").mousedown(function() {
     // console.log('mousedown circle');
     const shape = getDrawObject();
     shapes[index] = shape;
@@ -93,58 +84,70 @@ $("#drawing").mouseup(function(e) {
 
 
 
-function drowNodeCollering(nodes){
 
-var a = nodes.group().translate(60, 50);
-        a.circle(20).fill("#e8b900");
+function distxFun(distx,x){
+ return x * distx;
+}
 
-var b = nodes.group().translate(300, 50);
-        b.circle(20).fill("#e8b900");
+function distyFun(disty,y){
+    return y * disty;
+}
 
-var c = nodes.group().translate(60, 250);
-        c.circle(20).fill("#e8b900");  
+function drowNodeCollering(nodes,distx,disty,sizeCiracle){
+   
 
-var d = nodes.group().translate(300, 250);
-        d.circle(20).fill("#e8b900");
-
-var e = nodes.group().translate(60, 50);
-        e.circle(20).fill("#e8b900");
-
-var f = nodes.group().translate(300, 50);
-        f.circle(20).fill("#e8b900");
-
-var g = nodes.group().translate(60, 250);
-        g.circle(20).fill("#e8b900");  
-
-var h = nodes.group().translate(300, 250);
-        h.circle(20).fill("#e8b900");
-
-var p = nodes.group().translate(60, 50);
-        p.circle(20).fill("#e8b900");
-
-var k = nodes.group().translate(300, 50);
-        k.circle(20).fill("#e8b900");
-
-var l = nodes.group().translate(300, 50);
-        l.circle(20).fill("#e8b900");
-
-var m = nodes.group().translate(300, 250);
-        m.circle(20).fill("#e8b900");  
-
-var n = nodes.group().translate(60, 250);
-        n.circle(20).fill("#e8b900");
+var a = nodes.group().translate(distxFun(distx,9),distyFun(disty,0));
+        a.circle(sizeCiracle).fill("#e8b900");
         
-var x = nodes.group().translate(60, 50);
-        x.circle(20).fill("#e8b900");
 
-var y = nodes.group().translate(300, 50);
-        y.circle(20).fill("#e8b900");
+var b = nodes.group().translate(distxFun(distx,11),distyFun(disty,2));
+        b.circle(sizeCiracle).fill("#e8b900");  
 
-var w = nodes.group().translate(300, 50);
-        w.circle(20).fill("#e8b900");
+var c = nodes.group().translate(distxFun(distx,11),distyFun(disty,4));
+        c.circle(sizeCiracle).fill("#e8b900");                
 
-var z = nodes.group().translate(300, 250);
-        z.circle(20).fill("#e8b900");  
+var d = nodes.group().translate(distxFun(distx,9),distyFun(disty,6));
+        d.circle(sizeCiracle).fill("#e8b900");
+
+var e = nodes.group().translate(distxFun(distx,6),distyFun(disty,6));
+        e.circle(sizeCiracle).fill("#e8b900");        
+
+
+var f = nodes.group().translate(distxFun(distx,4),distyFun(disty,4));
+        f.circle(sizeCiracle).fill("#e8b900");
+
+var g = nodes.group().translate(distxFun(distx,4),distyFun(disty,2));
+        g.circle(sizeCiracle).fill("#e8b900");  
+
+var h = nodes.group().translate(distxFun(distx,6),distyFun(disty,0));
+        h.circle(sizeCiracle).fill("#e8b900");  
+
+var p = nodes.group().translate(distxFun(distx,8),distyFun(disty,3));
+        p.circle(sizeCiracle).fill("#e8b900");
+
+var k = nodes.group().translate(distxFun(distx,5),distyFun(disty,9));
+        k.circle(sizeCiracle).fill("#e8b900");
+
+var l = nodes.group().translate(distxFun(distx,5),distyFun(disty,11));
+        l.circle(sizeCiracle).fill("#e8b900");
+
+var m = nodes.group().translate(distxFun(distx,1),distyFun(disty,9));
+        m.circle(sizeCiracle).fill("#e8b900");  
+
+var n = nodes.group().translate(distxFun(distx,1),distyFun(disty,11));
+        n.circle(sizeCiracle).fill("#e8b900");
+        
+var x = nodes.group().translate(distxFun(distx,12),distyFun(disty,11));
+        x.circle(sizeCiracle).fill("#e8b900");
+
+var y = nodes.group().translate(distxFun(distx,12),distyFun(disty,9));
+        y.circle(sizeCiracle).fill("#e8b900");
+
+var w = nodes.group().translate(distxFun(distx,10),distyFun(disty,11));
+        w.circle(sizeCiracle).fill("#e8b900");
+
+var z = nodes.group().translate(distxFun(distx,10),distyFun(disty,9));
+        z.circle(sizeCiracle).fill("#e8b900");  
         
 
 
