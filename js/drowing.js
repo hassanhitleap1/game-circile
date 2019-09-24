@@ -205,8 +205,8 @@ $("#drawing >> g[x]" ).mousedown(function() {
 const shape = getDrawObject();
   shapes[index] = shape;
   shape.draw(event);
-  xDireaction=$(this).attr('x');
-  yDireaction=$(this).attr('y');
+  xDireaction=parseInt($(this).attr('x'));
+  yDireaction=parseInt($(this).attr('y'));
   if(!pointsArray.length){
     pointsArray=[[xDireaction,yDireaction]];
   }else{

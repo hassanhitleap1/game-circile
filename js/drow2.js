@@ -1,6 +1,11 @@
 let sizeCiracle=35;
 let distx=80;
 let disty=70;
+var answerOnePartOne=false;
+var answerOnePartTwo=false;
+var answerSecound=false;
+var answerThared=false;
+
 let  nodeSelector = document.getElementsByClassName("g-node");
 let a=[9,0];
 let b=[11,2];
@@ -22,15 +27,15 @@ let z=[10,9];
 
 
 let ponitsFirstAnswer=[
-    a,b,c,d,e,f,g,h
+    a,b,c,d,e,f,g,h,a
 ];
 
 let ponitsSecoundAnswer=[
-   k,l,m,n
+   k,l,m,n,k
 ];
 
 let ponitsTheardAnswer=[
-   w,x,y,z
+   x,w,y,z,
  ];
  
 let hafPoint=[
@@ -46,7 +51,7 @@ const shapes = [];
 let index = 0;
 let shape;
 let pointsArray = Array();
-let idG;
+let temp=Array();
 
 drowNods(distx,disty,sizeCiracle);
 
@@ -56,9 +61,9 @@ function drowNods(distx,disty,sizeCiracle) {
     x = 0;
     y = 0;
 
-    for (let i = 1; i <= 13; i++) {
+    for (let i = 0; i < 13; i++) {
 
-        for (let j = 1; j <= 13; j++) {
+        for (let j = 0; j < 13; j++) {
 
             var g = nodes.group().translate(x, y);
                     g.circle(sizeCiracle).fill("#437b11");
@@ -97,72 +102,56 @@ const getDrawObject = () => {
 
 
 $("#drawing >> g[x]" ).mousedown(function() {
-    // console.log('mousedown circle');
     const shape = getDrawObject();
       shapes[index] = shape;
       shape.draw(event);
-      xDireaction=$(this).attr('x');
-      yDireaction=$(this).attr('y');
+      xDireaction=parseInt($(this).attr('x'));
+      yDireaction=parseInt($(this).attr('y'));
+      temp=[xDireaction,yDireaction]; 
       
-      if(!pointsArray.length){
-        pointsArray=[[xDireaction,yDireaction]];
-      }else{
-        pointsArray.push([xDireaction,yDireaction]);
-      }
-    
-      
+     
 });
 
 
-$('#drawing').not("#drawing >>g").mouseup(function() {
-      console.log(this);
-     
-        if (shape === 'mouse paint') {
-            try {
-                shapes[index].draw('stop', event); 
-               if(false){
-                xDireaction=$(this).attr('x');
-                yDireaction=$(this).attr('y');
-                pointsArray.push([xDireaction,yDireaction]);
-                index++; 
-               }
-                
-            } catch (error) {   
-            }
-        } else {
-            if(!shape=='undefined'){
-                shapes[index].draw(event);
-            }
+
+$(document).mouseup(function(event) {
+    elLeft=document.elementFromPoint(event.pageX, event.pageY+2);
+    elRghit=document.elementFromPoint(event.pageX, event.pageY-2);
+    if(elLeft.tagName=="circle" || elRghit.tagName=="circle"){
+        shapes[index].draw('stop', event);
+        if(elLeft.tagName=="circle"){
+            xDireaction=parseInt(elLeft.parentElement.getAttribute('x'));
+            yDireaction=parseInt(elLeft.parentElement.getAttribute('y')); 
+        }else{
+            xDireaction=parseInt(elRghit.parentElement.getAttribute('x'));
+            yDireaction=parseInt(elRghit.parentElement.getAttribute('y'));
         }
-       
+        
+    if(pointsArray.length==0){
+        pointsArray.push(temp);
+        pointsArray.push([xDireaction,yDireaction]);
+    }else{
+        pointsArray.push([xDireaction,yDireaction]);
+
+    }    
+ 
+        
+    }else{
+        shapes[index].draw('cancel', event);  
+    }
+    
+     answerOnePartOne= firstQuestionPartOne(ponitsFirstAnswer,pointsArray);
+     console.log(answerOnePartOne);
+    // answerOnePartTwo= firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p);
+    // answerSecound= secondQuestion(ponitsSecoundAnswer,pointsArray);
+
+    //answerThared= tharedQuestion(ponitsTheardAnswer,pointsArray);
+   
+    
+    
+   
 });
 
-
-
-
-
-// $( "#drawing" ).not("circle").mouseup(function() {
-//       console.log(this);
-     
-//         if (shape === 'mouse paint') {
-//             try {
-//                 shapes[index].draw('stop', event); 
-//                if(false){
-//                 xDireaction=$(this).attr('x');
-//                 yDireaction=$(this).attr('y');
-//                 pointsArray.push([xDireaction,yDireaction]);
-//                 index++; 
-//                }
-                
-//             } catch (error) {   
-//             }
-//         } else {
-//             if(!shape=='undefined'){
-//                 shapes[index].draw(event);
-//             }
-//         }
-       
-//});
 
 
 
@@ -299,7 +288,7 @@ var z = nodes.group().translate(distxFun(distx,10),distyFun(disty,9));
 
         $("#" + z).addClass("g-node");
         $("#" + z).attr("x", 10);
-        $("#" + z).attr("y", 11);
+        $("#" + z).attr("y", 9);
         
 
 
@@ -314,14 +303,36 @@ function firstQuestion(ponitsFirstAnswer,pointsArray,p){
 }
 
 function firstQuestionPartOne(ponitsFirstAnswer,pointsArray){
+ 
+    var nodeTrue=0;
     for (let index = 0; index < pointsArray.length; index++) {
-        if((pointsArray[index][0]==ponitsFirstAnswer[index][0])  && (pointsArray[index][1]==ponitsFirstAnswer[index][1])){
-          return false;
+        
+        if(
+            (pointsArray[index][0]==ponitsFirstAnswer[index][0])  
+            && 
+            (pointsArray[index][1]==ponitsFirstAnswer[index][1])
+        )
+        {
+            nodeTrue++;
+          
         }
-     }
-     pointsArray=[];
-     return true;
+     
+    }
+
+        if(nodeTrue==9){
+            pointsArray.length=0;
+            return true;
+        }
+     
+
+
+     return false;
+    
+   
 }
+
+
+
 
 function firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p){
     var lines=0;
@@ -356,29 +367,45 @@ function firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p){
 
 
 
-function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
-    for (let index = 0; index < 4; index++) {
-        if((pointsArray[index][0]==ponitsSecoundAnswer[index][0])  && (pointsArray[index][1]==ponitsSecoundAnswer[index][1])){
-          return false;
+function secondQuestion(ponitsSecoundAnswer,pointsArray){
+    for (let index = 0; index < pointsArray.length; index++) {
+        if((pointsArray[index][0]==ponitsSecoundAnswer[index][0])  || (pointsArray[index][1]==ponitsSecoundAnswer[index][1])){
+          if(pointsArray.length==9 )
+          {
+             pointsArray.length = 0;
+             return true;
+          }
         }
      }
-     for (let index = 0; index < 2; index++) {
-        if((pointsArray[index+3][0]==hafPoint[index][0])  && (pointsArray[index+3][1]==hafPoint[index][1])){
-            return false;
-          }
-         
-     }
-     pointsArray=[];
-     return true;
+
+     return false;
+    
 }
 
 
 function tharedQuestion(ponitsTheardAnswer,pointsArray){
-   for (let index = 0; index < pointsArray.length; index++) {
-      if((pointsArray[index][0]==ponitsTheardAnswer[index][0])  && (pointsArray[index][1]==ponitsTheardAnswer[index][1])){
-        return false;
-      }
-   }
-   pointsArray=[];
-   return true;
+    
+    var nodeTrue=0;
+    for (let index = 0; index < pointsArray.length; index++) {
+        
+        if(
+            (pointsArray[index][0]==ponitsTheardAnswer[index][0])  
+            && 
+            (pointsArray[index][1]==ponitsTheardAnswer[index][1])
+        )
+        {
+            nodeTrue++;
+          
+        }
+     
+    }
+
+        if(nodeTrue==4){
+            return true;
+        }
+     
+
+
+     return false;
+    
 }
