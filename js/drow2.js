@@ -140,9 +140,10 @@ $(document).mouseup(function(event) {
         shapes[index].draw('cancel', event);  
     }
     
-     answerOnePartOne= firstQuestionPartOne(ponitsFirstAnswer,pointsArray);
-     console.log(answerOnePartOne);
-    // answerOnePartTwo= firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p);
+    //  answerOnePartOne= firstQuestionPartOne(ponitsFirstAnswer,pointsArray);
+    //  console.log(answerOnePartOne);
+     firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p);
+  
     // answerSecound= secondQuestion(ponitsSecoundAnswer,pointsArray);
 
     //answerThared= tharedQuestion(ponitsTheardAnswer,pointsArray);
@@ -336,36 +337,43 @@ function firstQuestionPartOne(ponitsFirstAnswer,pointsArray){
 
 function firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p){
     var lines=0;
-    // for loop in a b c d e f g h 
-     for (let index = 0; index < ponitsFirstAnswer.length; index++) {
-        
-        for (let indexJ = 0; indexJ < pointsArray.length; indexJ++) {
-            if((pointsArray[indexJ][0]==ponitsFirstAnswer[index][0])  
-            && (pointsArray[indexJ][1]==ponitsFirstAnswer[index][1])){
-               
+    
 
-                if(((pointsArray[indexJ-1][0]==p[0])  
-                && (pointsArray[indexJ-1][1]==p[1])
-                (pointsArray[indexJ+1][0]==p[0])  
-                && (pointsArray[indexJ+1][1]==p[1])  )
-                ){
-                    lines++;
-                }  
+    // check if poin is completed
+    if(pointsArray.length==9){
 
-            }  
-        }
+         // for loop in a b c d e f g h 
          
-     }
+         for (let index = 1; index <  pointsArray.length  ; index+=2) {
+            console.log("index",index);
+            if(pointsArray[index][0]==p[0] && pointsArray[index][1]==p[1] ){
+                
+                if(inNode(ponitsFirstAnswer,pointsArray[index-1])){
+                    lines++;
+                    console.log("lines",lines);
+                     
+                }
+            }else if((pointsArray[index-1][0]==p[0] && pointsArray[index-1][1]==p[1] )){
+              lines++;
+            }
 
-     pointsArray=[];
+         }
 
-     if(lines>=9){
-        return true;
-     }
-    return false;
+        
+    }
+   
 }
 
-
+function inNode(ponitsFirstAnswer,arr){
+    for (let index = 0; index < ponitsFirstAnswer.length; index++) {
+        if(ponitsFirstAnswer[index][0]==arr[0] && ponitsFirstAnswer[index][1]==arr[1] ){
+            console.log("arr in node",arr)
+            return true;
+        }
+        
+    }
+    return false;
+}
 
 function secondQuestion(ponitsSecoundAnswer,pointsArray){
     for (let index = 0; index < pointsArray.length; index++) {
