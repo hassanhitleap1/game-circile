@@ -1,7 +1,39 @@
 let sizeCiracle=35;
 let distx=80;
 let disty=70;
+let  nodeSelector = document.getElementsByClassName("g-node");
+let a=[9,0];
+let b=[11,2];
+let c=[11,4];
+let d=[9,6];
+let e=[6,6]
+let f=[4,4];
+let g=[4,2];
+let h=[6,0];
+let p=[8,3];
+let m=[1,11];
+let n=[1,9];
+let x=[12,11];
+let y=[12,9];
+let w=[10,11];
+let z=[10,9];
 
+
+let ponitsFirstAnswer=[
+    a,b,c,d,e,f,g,h
+];
+
+let ponitsSecoundAnswer=[
+   k,l,m,n
+];
+
+let ponitsTheardAnswer=[
+   w,x,y,z
+ ];
+ 
+let hafPoint=[
+    [3,9],[3,11]
+];
 
 var svg = new SVG(document.querySelector(".graph")).size("100%",1000);
 
@@ -61,27 +93,76 @@ const getDrawObject = () => {
 
 
 
-$("#drawing >> g[x]").mousedown(function() {
+
+$("#drawing >> g[x]" ).mousedown(function() {
     // console.log('mousedown circle');
     const shape = getDrawObject();
-  console.log(shape);
-    shapes[index] = shape;
-    shape.draw(event);
-
-
+      shapes[index] = shape;
+      shape.draw(event);
+      xDireaction=$(this).attr('x');
+      yDireaction=$(this).attr('y');
+      
+      if(!pointsArray.length){
+        pointsArray=[[xDireaction,yDireaction]];
+      }else{
+        pointsArray.push([xDireaction,yDireaction]);
+      }
+    
+      
 });
 
 
-$("#drawing").mouseup(function(e) {
-    if (typeof $(e.target).children().eq(1).closest("g")[0] == "undefined") {
-        console.log(e.target.points)
-    }
-    if (shape === 'mouse paint') {
-        shapes[index].draw('stop', event);
-
-    }
-
+$('#drawing').not("#drawing >>g").mouseup(function() {
+      console.log(this);
+     
+        if (shape === 'mouse paint') {
+            try {
+                shapes[index].draw('stop', event); 
+               if(false){
+                xDireaction=$(this).attr('x');
+                yDireaction=$(this).attr('y');
+                pointsArray.push([xDireaction,yDireaction]);
+                index++; 
+               }
+                
+            } catch (error) {   
+            }
+        } else {
+            if(!shape=='undefined'){
+                shapes[index].draw(event);
+            }
+        }
+       
 });
+
+
+
+
+
+// $( "#drawing" ).not("circle").mouseup(function() {
+//       console.log(this);
+     
+//         if (shape === 'mouse paint') {
+//             try {
+//                 shapes[index].draw('stop', event); 
+//                if(false){
+//                 xDireaction=$(this).attr('x');
+//                 yDireaction=$(this).attr('y');
+//                 pointsArray.push([xDireaction,yDireaction]);
+//                 index++; 
+//                }
+                
+//             } catch (error) {   
+//             }
+//         } else {
+//             if(!shape=='undefined'){
+//                 shapes[index].draw(event);
+//             }
+//         }
+       
+//});
+
+
 
 
 
@@ -172,14 +253,14 @@ var l = nodes.group().translate(distxFun(distx,5),distyFun(disty,11));
         $("#" + l).attr("y", 11);
 
 
-var m = nodes.group().translate(distxFun(distx,1),distyFun(disty,9));
+var m = nodes.group().translate(distxFun(distx,1),distyFun(disty,11));
         m.circle(sizeCiracle).fill("#e8b900");  
 
         $("#" + m).addClass("g-node");
         $("#" + m).attr("x", 1);
         $("#" + m).attr("y", 9);
 
-var n = nodes.group().translate(distxFun(distx,1),distyFun(disty,11));
+var n = nodes.group().translate(distxFun(distx,1),distyFun(disty,9));
         n.circle(sizeCiracle).fill("#e8b900");
 
         $("#" + n).addClass("g-node");
@@ -220,9 +301,82 @@ var z = nodes.group().translate(distxFun(distx,10),distyFun(disty,9));
         
 
 
-      
+
+}
 
 
 
+function firstQuestion(ponitsFirstAnswer,pointsArray,p){
+    firstQuestionPartOne(ponitsFirstAnswer,pointsArray);
+    firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p);
+}
 
+function firstQuestionPartOne(ponitsFirstAnswer,pointsArray){
+    for (let index = 0; index < pointsArray.length; index++) {
+        if((pointsArray[index][0]==ponitsFirstAnswer[index][0])  && (pointsArray[index][1]==ponitsFirstAnswer[index][1])){
+          return false;
+        }
+     }
+     pointsArray=[];
+     return true;
+}
+
+function firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p){
+    var lines=0;
+    // for loop in a b c d e f g h 
+     for (let index = 0; index < ponitsFirstAnswer.length; index++) {
+        
+        for (let indexJ = 0; indexJ < pointsArray.length; indexJ++) {
+            if((pointsArray[indexJ][0]==ponitsFirstAnswer[index][0])  
+            && (pointsArray[indexJ][1]==ponitsFirstAnswer[index][1])){
+               
+
+                if(((pointsArray[indexJ-1][0]==p[0])  
+                && (pointsArray[indexJ-1][1]==p[1])
+                (pointsArray[indexJ+1][0]==p[0])  
+                && (pointsArray[indexJ+1][1]==p[1])  )
+                ){
+                    lines++;
+                }  
+
+            }  
+        }
+         
+     }
+
+     pointsArray=[];
+
+     if(lines>=9){
+        return true;
+     }
+    return false;
+}
+
+
+
+function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
+    for (let index = 0; index < 4; index++) {
+        if((pointsArray[index][0]==ponitsSecoundAnswer[index][0])  && (pointsArray[index][1]==ponitsSecoundAnswer[index][1])){
+          return false;
+        }
+     }
+     for (let index = 0; index < 2; index++) {
+        if((pointsArray[index+3][0]==hafPoint[index][0])  && (pointsArray[index+3][1]==hafPoint[index][1])){
+            return false;
+          }
+         
+     }
+     pointsArray=[];
+     return true;
+}
+
+
+function tharedQuestion(ponitsTheardAnswer,pointsArray){
+   for (let index = 0; index < pointsArray.length; index++) {
+      if((pointsArray[index][0]==ponitsTheardAnswer[index][0])  && (pointsArray[index][1]==ponitsTheardAnswer[index][1])){
+        return false;
+      }
+   }
+   pointsArray=[];
+   return true;
 }
