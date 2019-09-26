@@ -1,8 +1,21 @@
 body{
   overflow: hidden;
 }
-  .graph{
+  
+.graph{
     border: 1px solid black;
     width: 100%;
    
-  }
+}
+
+.wrapper{
+  margin: 20px;
+}
+
+strong{
+  color : #61b2f9
+}
+
+p {
+  font-size: 22px;
+}
