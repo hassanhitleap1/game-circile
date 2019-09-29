@@ -15,6 +15,7 @@ var answerOnePartTwo=false;
 var answerSecound=false;
 var answerThared=false;
 var mark=0;
+var numberQustion=1;
 
 
 function sizeDistX(x,height){
@@ -64,6 +65,8 @@ let ponitsTheardAnswer=[
 let hafPoint=[
     [3,9],[3,11]
 ];
+
+let tempArrayforSecoundQustion=[];
 
 var svg = new SVG(document.querySelector(".graph")).size("100%","100%");
 
@@ -131,8 +134,7 @@ $("#drawing >> g[x]" ).mousedown(function() {
       xDireaction=parseInt($(this).attr('x'));
       yDireaction=parseInt($(this).attr('y'));
       temp=[xDireaction,yDireaction]; 
-      
-     
+      tempArrayforSecoundQustion.push(temp);
 });
 
 
@@ -140,29 +142,49 @@ $("#drawing >> g[x]" ).mousedown(function() {
 $("svg").mouseup(function(event) {
     elLeft=document.elementFromPoint(event.pageX, event.pageY+2);
     elRghit=document.elementFromPoint(event.pageX, event.pageY-2);
-    if(elLeft.tagName=="circle" || elRghit.tagName=="circle"){
-        shapes[index].draw('stop', event);
-        if(elLeft.tagName=="circle"){
-            xDireaction=parseInt(elLeft.parentElement.getAttribute('x'));
-            yDireaction=parseInt(elLeft.parentElement.getAttribute('y')); 
+    try {
+        if(elLeft.tagName=="circle" || elRghit.tagName=="circle"){
+            shapes[index].draw('stop', event);
+            if(elLeft.tagName=="circle"){
+                xDireaction=parseInt(elLeft.parentElement.getAttribute('x'));
+                yDireaction=parseInt(elLeft.parentElement.getAttribute('y')); 
+            }else{
+                xDireaction=parseInt(elRghit.parentElement.getAttribute('x'));
+                yDireaction=parseInt(elRghit.parentElement.getAttribute('y'));
+            }
+            
+        if(pointsArray.length==0){
+            pointsArray.push(temp);
+            pointsArray.push([xDireaction,yDireaction]);
         }else{
-            xDireaction=parseInt(elRghit.parentElement.getAttribute('x'));
-            yDireaction=parseInt(elRghit.parentElement.getAttribute('y'));
-        }
-        
-    if(pointsArray.length==0){
-        pointsArray.push(temp);
-        pointsArray.push([xDireaction,yDireaction]);
-    }else{
-        pointsArray.push([xDireaction,yDireaction]);
+            if(pointsArray[pointsArray.length-1][0]==temp[0] && pointsArray[pointsArray.length-1][1]==temp[1] ){
+                pointsArray.push([xDireaction,yDireaction]);
+            }else{
+                pointsArray.push(temp);
+                pointsArray.push([xDireaction,yDireaction]); 
+            }
+           
+    
+        }   
+            
+        }else{
+            shapes[index].draw('cancel', event);  
+        }   
 
-    }    
-    }else{
-        shapes[index].draw('cancel', event);  
-    }   
+    } catch (error) {
+        shapes[index].draw('cancel', event);   
+    }
 
+    tharedQuestion(ponitsTheardAnswer,pointsArray);
   
+    if(numberQustion==3){
+    
+        secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint);  
 
+    }else if(numberQustion==4){
+        tharedQuestion(ponitsTheardAnswer,pointsArray);
+    }
+   
 });
 
 
@@ -259,14 +281,14 @@ var m = nodes.group().translate(distxFun(distx,1),distyFun(disty,11));
 
         $("#" + m).addClass("g-node");
         $("#" + m).attr("x", 1);
-        $("#" + m).attr("y", 9);
+        $("#" + m).attr("y", 11);
 
 var n = nodes.group().translate(distxFun(distx,1),distyFun(disty,9));
         n.circle(sizeCiracle).fill("#e8b900");
 
         $("#" + n).addClass("g-node");
         $("#" + n).attr("x", 1);
-        $("#" + n).attr("y", 11);
+        $("#" + n).attr("y", 9);
         
 var x = nodes.group().translate(distxFun(distx,12),distyFun(disty,11));
         x.circle(sizeCiracle).fill("#e8b900");
@@ -300,10 +322,8 @@ var z = nodes.group().translate(distxFun(distx,10),distyFun(disty,9));
         $("#" + z).attr("x", 10);
         $("#" + z).attr("y", 9);
         
-
-
-
 }
+
 
 
 
@@ -339,34 +359,33 @@ function firstQuestionPartOne(ponitsFirstAnswer,pointsArray){
 
 
 
+function firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p,tempArrayforSecoundQustion){
 
-function firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p,temp){
-
-    pointsArray.push(temp);
-    
-    for (let index = 0; index < pointsArray.length; index++) {
-        if(pointsArray[index][0]==p[0] && pointsArray[index][1]==p[1] ){   
-            pointsArray.splice(index, 1); 
-        }
+    for (let i = 0; i < tempArrayforSecoundQustion.length; i++) {
+        pointsArray.push(tempArrayforSecoundQustion[i])
     }
 
-    for (let index = 0; index < ponitsFirstAnswer.length; index++) {
-        for (let indexJ = 0; indexJ < pointsArray.length; indexJ++) {
-
-            if  (
-                pointsArray[indexJ][0]==ponitsFirstAnswer[index][0]
-                 &&
-                pointsArray[indexJ][1]==ponitsFirstAnswer[index][1]
-                )
-
-            {
-                pointsArray.splice(indexJ, 1); 
-            }
-            
-
+    pointsArray = pointsArray.filter(function(item) {
+        if(!(item[0] == p[0] && item[1] == p[1])){
+            return item;
         }
-    }
-    
+    });
+
+    pointsArray = pointsArray.filter(function(item) {
+        for (let index = 0; index < ponitsFirstAnswer.length; index++) {
+       
+            if( !
+                item[0]==ponitsFirstAnswer[index][0]
+                  &&
+                  item[1]==ponitsFirstAnswer[index][1]
+              )
+              {
+                 return item;
+              
+              }
+        }
+
+    });
 
     if(pointsArray.length==0){
         return true;
@@ -375,18 +394,49 @@ function firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p,temp){
    
 }
 
-function secondQuestion(ponitsSecoundAnswer,pointsArray){
+function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
+    var nodeTrue=0;
+    console.log("pointsArray",pointsArray);
     for (let index = 0; index < pointsArray.length; index++) {
-        if((pointsArray[index][0]==ponitsSecoundAnswer[index][0])  || (pointsArray[index][1]==ponitsSecoundAnswer[index][1])){
-          if(pointsArray.length==9 )
-          {
-             pointsArray.length = 0;
-             return true;
-          }
+        
+        if(
+            (pointsArray[index][0]==ponitsSecoundAnswer[index][0])  
+            && 
+            (pointsArray[index][1]==ponitsSecoundAnswer[index][1])
+        )
+        {
+            nodeTrue++;
+            if(nodeTrue==5){
+    
+                console.log(nodeTrue);
+                
+                if(
+                    ((pointsArray[pointsArray.length-1][0]==hafPoint[0][0])  && 
+                    (pointsArray[pointsArray.length-1][1]==hafPoint[0][1]))
+                    || 
+                    ((pointsArray[pointsArray.length-2][0]==hafPoint[0][0])  && 
+                    (pointsArray[pointsArray.length-2][1]==hafPoint[0][1]))
+        
+                )
+                {
+                    answerSecound=true;
+                    console.log("answerSecound",answerSecound)
+                    mark+=25;
+                    pointsArray.length=0;
+                    numberQustion++;
+                    activeQustion(numberQustion);
+                    return true;
+                }
+        
+            }  
         }
-     }
+     
+    }
 
+    
+     
      return false;
+    
     
 }
 
@@ -397,9 +447,9 @@ function tharedQuestion(ponitsTheardAnswer,pointsArray){
     for (let index = 0; index < pointsArray.length; index++) {
         
         if(
-            (pointsArray[index][0]==ponitsTheardAnswer[index][0])  
+            (pointsArray[index][0]==ponitsFirstAnswer[index][0])  
             && 
-            (pointsArray[index][1]==ponitsTheardAnswer[index][1])
+            (pointsArray[index][1]==ponitsFirstAnswer[index][1])
         )
         {
             nodeTrue++;
@@ -407,8 +457,9 @@ function tharedQuestion(ponitsTheardAnswer,pointsArray){
         }
      
     }
-
-        if(nodeTrue==4){
+ 
+        if(nodeTrue==5){
+            
             return true;
         }
      
@@ -430,11 +481,14 @@ function inNode(ponitsFirstAnswer,arr){
     return false;
 }
 
+
+
+
+
 $("#first_answer").change(function(event) {
     answerOnePartOne= firstQuestionPartOne(ponitsFirstAnswer,pointsArray);
-
-    if(answerOnePartOne ){
-        pointsArray.length=0;
+    
+    if(answerOnePartOne){
         mark+=12.5;
         if($(this).val()=="octagon"){
             mark+=12.5;
@@ -443,26 +497,40 @@ $("#first_answer").change(function(event) {
     }else if($(this).val()=="octagon"){
         mark+=12.5;
     }
-    
+    console.log("firstQuestionPartOne",firstQuestionPartOne);
+    console.log("mark",mark);
+
+    pointsArray.length=0;
+    tempArrayforSecoundQustion.length=0;
+    activeQustion(numberQustion++);
 
 });
 
 
 $("#secound_answer").change(function(event) {
-    answerOnePartTwo= firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p,temp);
-    alert(answerOnePartTwo);
+    answerOnePartTwo= firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p,tempArrayforSecoundQustion);
     if(answerOnePartTwo ){
-        pointsArray.length=0;
         mark+=12.5;
         if($(this).val()==8 ){
             mark+=12.5;
         }
-        
     }else if($(this).val()=="octagon"){
         mark+=12.5;
+      
     }
-
+    console.log("answerOnePartTwo",answerOnePartTwo)
+    console.log("mark",mark)
+    activeQustion(numberQustion++);
+    pointsArray.length=0;
+    tempArrayforSecoundQustion.length=0;
 });
+
+
+
+function activeQustion(numberQustion){
+    $(".list-group-item").removeClass("active");
+    $($(".list-group-item")[numberQustion]).addClass("active");
+}
 
 
 

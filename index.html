@@ -24,52 +24,56 @@
       <div class="wrapper" >
         <div class="row">
             <div class="col-md-4">
-                  <li class="list-group-item list-group-item-action"> 
-                     <p>join the points 
-                        <strong>A , B , C , D , E , F , G , H , A </strong>
-                     </p>
-                     <p>
-                        
-                      <!--Blue select-->
-                      <select class="selectpicker" id="first_answer"> 
-                           <option value=""></option>
-                           <option value="square">square</option>
-                           <option value="triangle">triangle</option>
-                           <option value="octagon">octagon</option>
-                         </select>
-
-                     </p>
-                  </li>
-                  <li class="list-group-item list-group-item-action">
-                     <p>join the points with each of the point 
-                              <strong>A , B , C , D , E , F , G , H  </strong> you can get
-                              <select class="selectpicker" id="secound_answer">
-                                    <option value=""></option>
-                                    <option value=7>7</option>
-                                    <option value=10>10</option>
-                                    <option value=6>6</option>
-                                    <option value=8> 8</option>
-                                    <option value=9>9</option>
-                                  </select>
-                                  triangles
+               <ul>
+                     <li class="list-group-item active"> 
+                           <p>join the points 
+                              <strong>A , B , C , D , E , F , G , H , A </strong>
                            </p>
-
-                     
-                  </li>
-                  <li class="list-group-item list-group-item-action">
-                        <p>Drwo the line 
-                              <strong>rtriangle K L M N </strong> to get<strong> 2</strong>  square
+                           <p>
+                              
+                            <!--Blue select-->
+                            <select class="selectpicker" id="first_answer"> 
+                                 <option value=""></option>
+                                 <option value="square">square</option>
+                                 <option value="triangle">triangle</option>
+                                 <option value="octagon">octagon</option>
+                               </select>
+      
+                           </p>
+                        </li>
+                        <li class="list-group-item ">
+                           <p>join the points with each of the point 
+                                    <strong>A , B , C , D , E , F , G , H  </strong> you can get
+                                    <select class="selectpicker" id="secound_answer">
+                                          <option value=""></option>
+                                          <option value=7>7</option>
+                                          <option value=10>10</option>
+                                          <option value=6>6</option>
+                                          <option value=8> 8</option>
+                                          <option value=9>9</option>
+                                        </select>
+                                        triangles
+                                 </p>
+      
+                           
+                        </li>
+                        <li class="list-group-item ">
+                              <p>Drwo the line 
+                                    <strong>rtriangle K L M N </strong> to get<strong> 2</strong>  square
+                                  
+                                        triangles
+                                 </p>
+                        </li>
+                        <li class="list-group-item " >      
+                           <p>Drwo a shap like <strong>W X Y Z</strong> using dots in the figure.
                             
                                   triangles
                            </p>
-                  </li>
-                  <li class="list-group-item list-group-item-action" >      
-                     <p>Drwo a shap like <strong>W X Y Z</strong> using dots in the figure.
-                      
-                            triangles
-                     </p></li>
+                        </li>
+               </ul>
+                
             </div>
-            <div class="col-md-8"><svg class="graph" id="drawing"></svg></div>
+            <div class="col-md-8 div-svg"><svg class="graph" id="drawing"></svg></div>
         </div>
       </div>
       <script src="js/drow2.js"></script>

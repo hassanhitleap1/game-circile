@@ -19,3 +19,10 @@ strong{
 p {
   font-size: 22px;
 }
+.div-svg{
+  height: 479px;
+}
+
+.active > p > strong {
+color: white !important;
+}
