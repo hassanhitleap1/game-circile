@@ -175,7 +175,7 @@ $("svg").mouseup(function(event) {
         shapes[index].draw('cancel', event);   
     }
 
-    
+    tharedQuestion(ponitsTheardAnswer,pointsArray);
   
     if(numberQustion==3){
     
@@ -461,7 +461,7 @@ function tharedQuestion(ponitsTheardAnswer,pointsArray){
      
         if(pointsArray[2][0]==2 && pointsArray[2][1]==2){
             if(pointsArray.length==5){
-                console.log("thared",true)
+                console.log("thared",pointsArray)
                 return true;
             }
         }
