@@ -299,8 +299,6 @@ var x = nodes.group().translate(distxFun(distx,12),distyFun(disty,11));
 
 var y = nodes.group().translate(distxFun(distx,12),distyFun(disty,9));
         y.circle(sizeCiracle).fill("#e8b900");
-
-
         $("#" + y).addClass("g-node");
         $("#" + y).attr("x", 12);
         $("#" + y).attr("y", 9);
@@ -322,7 +320,11 @@ var z = nodes.group().translate(distxFun(distx,10),distyFun(disty,9));
         $("#" + z).attr("x", 10);
         $("#" + z).attr("y", 9);
 
-        
+var nodesfrom = nodes.group().translate(distxFun(distx,0),distyFun(disty,0));
+nodesfrom.circle(sizeCiracle).fill("#036fe2");
+        $("#" + nodesfrom).addClass("g-node");
+        $("#" + nodesfrom).attr("x", 0);
+        $("#" + nodesfrom).attr("y", 0);       
 
 }
 
