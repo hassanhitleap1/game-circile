@@ -59,7 +59,7 @@ let ponitsSecoundAnswer=[
 ];
 
 let ponitsTheardAnswer=[
-   x,w,y,z,
+   x,w,y,z,x
  ];
  
 let hafPoint=[
@@ -175,7 +175,7 @@ $("svg").mouseup(function(event) {
         shapes[index].draw('cancel', event);   
     }
 
-    tharedQuestion(ponitsTheardAnswer,pointsArray);
+    
   
     if(numberQustion==3){
     
@@ -321,7 +321,9 @@ var z = nodes.group().translate(distxFun(distx,10),distyFun(disty,9));
         $("#" + z).addClass("g-node");
         $("#" + z).attr("x", 10);
         $("#" + z).attr("y", 9);
+
         
+
 }
 
 
@@ -423,8 +425,7 @@ function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
                     console.log("answerSecound",answerSecound)
                     mark+=25;
                     pointsArray.length=0;
-                    numberQustion++;
-                    activeQustion(numberQustion);
+                    activeQustion(numberQustion++);
                     return true;
                 }
         
@@ -441,32 +442,34 @@ function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
 }
 
 
+
+
+
 function tharedQuestion(ponitsTheardAnswer,pointsArray){
+    console.log("pointsArray",pointsArray)
     
-    var nodeTrue=0;
-    for (let index = 0; index < pointsArray.length; index++) {
-        
-        if(
-            (pointsArray[index][0]==ponitsFirstAnswer[index][0])  
-            && 
-            (pointsArray[index][1]==ponitsFirstAnswer[index][1])
-        )
-        {
-            nodeTrue++;
-          
-        }
-     
+    if(! pointsArray[0][0]==0 && pointsArray[0][1]==0){
+        return false
     }
- 
-        if(nodeTrue==5){
-            
-            return true;
-        }
-     
 
-
-     return false;
+    if(
+        (pointsArray[1][0]==2 && pointsArray[1][1]==0)
+        ||
+        (pointsArray[1][0]==0 && pointsArray[1][1]==2)
     
+    ){
+     
+        if(pointsArray[2][0]==2 && pointsArray[2][1]==2){
+            if(pointsArray.length==5){
+                console.log("thared",true)
+                return true;
+            }
+        }
+
+    }
+    
+    
+    return false;
 }
 
 function inNode(ponitsFirstAnswer,arr){
@@ -528,6 +531,7 @@ $("#secound_answer").change(function(event) {
 
 
 function activeQustion(numberQustion){
+    console.log("numberQustion",numberQustion)
     $(".list-group-item").removeClass("active");
     $($(".list-group-item")[numberQustion]).addClass("active");
 }
