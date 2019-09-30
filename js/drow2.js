@@ -175,7 +175,7 @@ $("svg").mouseup(function(event) {
         shapes[index].draw('cancel', event);   
     }
 
-    tharedQuestion(ponitsTheardAnswer,pointsArray);
+  
   
     if(numberQustion==3){
     
@@ -207,35 +207,41 @@ var a = nodes.group().translate(distxFun(distx,9),distyFun(disty,0));
         $("#" + a).addClass("g-node");
         $("#" + a).attr("x", 9);
         $("#" + a).attr("y", 0);        
-       svg.text("A").translate(distxFun(distx,9.5),distyFun(disty,0))
+       text=svg.text("A").translate(distxFun(distx,9.5),distyFun(disty,0));
+       $("#" + text.node.id).addClass("later");
+       
 
 var b = nodes.group().translate(distxFun(distx,11),distyFun(disty,2));
         b.circle(sizeCiracle).fill("#e8b900");  
         $("#" + b).addClass("g-node");
         $("#" + b).attr("x", 11);
         $("#" + b).attr("y", 2);
-        svg.text("B").translate(distxFun(distx,11.5),distyFun(disty,2))
+        test=svg.text("B").translate(distxFun(distx,11.5),distyFun(disty,2))
+        $("#" + text.node.id).addClass("later");
 
 var c = nodes.group().translate(distxFun(distx,11),distyFun(disty,4));
         c.circle(sizeCiracle).fill("#e8b900"); 
         $("#" + c).addClass("g-node");
         $("#" + c).attr("x", 11);
         $("#" + c).attr("y", 4);
-        svg.text("C").translate(distxFun(distx,11.5),distyFun(disty,4)) ;            
+        test=svg.text("C").translate(distxFun(distx,11.5),distyFun(disty,4)) ; 
+        $("#" + text.node.id).addClass("later");           
 
 var d = nodes.group().translate(distxFun(distx,9),distyFun(disty,6));
         d.circle(sizeCiracle).fill("#e8b900");
         $("#" + d).addClass("g-node");
         $("#" + d).attr("x", 9);
         $("#" + d).attr("y", 6);
-        svg.text("D").translate(distxFun(distx,9.5),distyFun(disty,6)) ;   
+       test= svg.text("D").translate(distxFun(distx,9.5),distyFun(disty,6)) ;   
+       $("#" + text.node.id).addClass("later");
 
 var e = nodes.group().translate(distxFun(distx,6),distyFun(disty,6));
         e.circle(sizeCiracle).fill("#e8b900"); 
         $("#" + e).addClass("g-node");
         $("#" + e).attr("x", 6);
         $("#" + e).attr("y", 6); 
-        svg.text("E").translate(distxFun(distx,6.5),distyFun(disty,6)) ;       
+        test=svg.text("E").translate(distxFun(distx,6.5),distyFun(disty,6)) ;
+        $("#" + text.node.id).addClass("later");       
 
 
 var f = nodes.group().translate(distxFun(distx,4),distyFun(disty,4));
@@ -244,7 +250,8 @@ var f = nodes.group().translate(distxFun(distx,4),distyFun(disty,4));
         $("#" + f).addClass("g-node");
         $("#" + f).attr("x", 4);
         $("#" + f).attr("y", 4);
-        svg.text("F").translate(distxFun(distx,4.5),distyFun(disty,4)) ;  
+        test=svg.text("F").translate(distxFun(distx,4.5),distyFun(disty,4)) ;  
+        $("#" + text.node.id).addClass("later");
 
 var g = nodes.group().translate(distxFun(distx,4),distyFun(disty,2));
         g.circle(sizeCiracle).fill("#e8b900");  
@@ -252,7 +259,8 @@ var g = nodes.group().translate(distxFun(distx,4),distyFun(disty,2));
         $("#" + g).addClass("g-node");
         $("#" + g).attr("x",4);
         $("#" + g).attr("y", 2);
-        svg.text("G").translate(distxFun(distx,4.5),distyFun(disty,2)) ;  
+        test=svg.text("G").translate(distxFun(distx,4.5),distyFun(disty,2)) ;  
+        $("#" + text.node.id).addClass("later");
 
 var h = nodes.group().translate(distxFun(distx,6),distyFun(disty,0));
         h.circle(sizeCiracle).fill("#e8b900");  
@@ -260,7 +268,8 @@ var h = nodes.group().translate(distxFun(distx,6),distyFun(disty,0));
         $("#" + h).addClass("g-node");
         $("#" + h).attr("x", 6);
         $("#" + h).attr("y", 0);
-        svg.text("H").translate(distxFun(distx,6.5),distyFun(disty,0)) ;  
+       test= svg.text("H").translate(distxFun(distx,6.5),distyFun(disty,0)) ;  
+        $("#" + text.node.id).addClass("later");
 
 var p = nodes.group().translate(distxFun(distx,8),distyFun(disty,3));
         p.circle(sizeCiracle).fill("#e8b900");
@@ -268,7 +277,8 @@ var p = nodes.group().translate(distxFun(distx,8),distyFun(disty,3));
         $("#" + p).addClass("g-node");
         $("#" + p).attr("x", 8);
         $("#" + p).attr("y", 3);
-        svg.text("P").translate(distxFun(distx,7.5),distyFun(disty,3)) ;  
+        test=svg.text("P").translate(distxFun(distx,7.5),distyFun(disty,3)) ; 
+        $("#" + text.node.id).addClass("later"); 
 
 var k = nodes.group().translate(distxFun(distx,5),distyFun(disty,9));
         k.circle(sizeCiracle).fill("#e8b900");
@@ -276,14 +286,16 @@ var k = nodes.group().translate(distxFun(distx,5),distyFun(disty,9));
         $("#" + k).addClass("g-node");
         $("#" + k).attr("x", 5);
         $("#" + k).attr("y", 9);
-        svg.text("K").translate(distxFun(distx,5.5),distyFun(disty,9)) ;  
+        test=svg.text("K").translate(distxFun(distx,5.5),distyFun(disty,9)) ;  
+        $("#" + text.node.id).addClass("later");
 
 var l = nodes.group().translate(distxFun(distx,5),distyFun(disty,11));
         l.circle(sizeCiracle).fill("#e8b900");
         $("#" + l).addClass("g-node");
         $("#" + l).attr("x", 5);
         $("#" + l).attr("y", 11);
-        svg.text("L").translate(distxFun(distx,5.5),distyFun(disty,11)) ;  
+        test=svg.text("L").translate(distxFun(distx,5.5),distyFun(disty,11)) ;  
+        $("#" + text.node.id).addClass("later");
 
 
 var m = nodes.group().translate(distxFun(distx,1),distyFun(disty,11));
@@ -292,7 +304,8 @@ var m = nodes.group().translate(distxFun(distx,1),distyFun(disty,11));
         $("#" + m).addClass("g-node");
         $("#" + m).attr("x", 1);
         $("#" + m).attr("y", 11);
-        svg.text("M").translate(distxFun(distx,1.5),distyFun(disty,11)) ;  
+       test= svg.text("M").translate(distxFun(distx,1.5),distyFun(disty,11)) ;  
+        $("#" + text.node.id).addClass("later");
 
 var n = nodes.group().translate(distxFun(distx,1),distyFun(disty,9));
         n.circle(sizeCiracle).fill("#e8b900");
@@ -300,7 +313,8 @@ var n = nodes.group().translate(distxFun(distx,1),distyFun(disty,9));
         $("#" + n).addClass("g-node");
         $("#" + n).attr("x", 1);
         $("#" + n).attr("y", 9);
-        svg.text("N").translate(distxFun(distx,1.5),distyFun(disty,9)) ;  
+       test= svg.text("N").translate(distxFun(distx,1.5),distyFun(disty,9)) ;
+        $("#" + text.node.id).addClass("later");  
         
 var x = nodes.group().translate(distxFun(distx,12),distyFun(disty,11));
         x.circle(sizeCiracle).fill("#e8b900");
@@ -308,14 +322,16 @@ var x = nodes.group().translate(distxFun(distx,12),distyFun(disty,11));
         $("#" + x).addClass("g-node");
         $("#" + x).attr("x", 12);
         $("#" + x).attr("y", 11);
-        svg.text("X").translate(distxFun(distx,11.5),distyFun(disty,11)) ; 
+        test=svg.text("X").translate(distxFun(distx,11.5),distyFun(disty,11)) ; 
+        $("#" + text.node.id).addClass("later");
 
 var y = nodes.group().translate(distxFun(distx,12),distyFun(disty,9));
         y.circle(sizeCiracle).fill("#e8b900");
         $("#" + y).addClass("g-node");
         $("#" + y).attr("x", 12);
         $("#" + y).attr("y", 9);
-        svg.text("Y").translate(distxFun(distx,11.5),distyFun(disty,9)) ; 
+        test=svg.text("Y").translate(distxFun(distx,11.5),distyFun(disty,9)) ; 
+        $("#" + text.node.id).addClass("later");
 
 var w = nodes.group().translate(distxFun(distx,10),distyFun(disty,11));
         w.circle(sizeCiracle).fill("#e8b900");
@@ -324,7 +340,8 @@ var w = nodes.group().translate(distxFun(distx,10),distyFun(disty,11));
         $("#" + w).addClass("g-node");
         $("#" + w).attr("x", 10);
         $("#" + w).attr("y", 11);
-        svg.text("W").translate(distxFun(distx,9.5),distyFun(disty,11)) ; 
+        test=svg.text("W").translate(distxFun(distx,9.5),distyFun(disty,11)) ; 
+        $("#" + text.node.id).addClass("later");
 
 
 
@@ -334,7 +351,8 @@ var z = nodes.group().translate(distxFun(distx,10),distyFun(disty,9));
         $("#" + z).addClass("g-node");
         $("#" + z).attr("x", 10);
         $("#" + z).attr("y", 9);
-        svg.text("Z").translate(distxFun(distx,9.5),distyFun(disty,9)) ; 
+        test=svg.text("Z").translate(distxFun(distx,9.5),distyFun(disty,9)) ;
+        $("#" + text.node.id).addClass("later"); 
 
 var nodesfrom = nodes.group().translate(distxFun(distx,0),distyFun(disty,0));
 nodesfrom.circle(sizeCiracle).fill("#036fe2");
@@ -349,7 +367,7 @@ nodesfrom.circle(sizeCiracle).fill("#036fe2");
 
 
 function firstQuestionPartOne(ponitsFirstAnswer,pointsArray){
- 
+    console.log("thared",pointsArray)
     var nodeTrue=0;
     for (let index = 0; index < pointsArray.length; index++) {
         
@@ -478,8 +496,11 @@ function tharedQuestion(ponitsTheardAnswer,pointsArray){
     ){
      
         if(pointsArray[2][0]==2 && pointsArray[2][1]==2){
-            if(pointsArray.length==5){
+            if(pointsArray.length==5){+
+              
                 console.log("thared",pointsArray)
+                mark+=25;
+                console.log("mark",mark);
                 return true;
             }
         }
@@ -535,7 +556,7 @@ $("#secound_answer").change(function(event) {
         if($(this).val()==8 ){
             mark+=12.5;
         }
-    }else if($(this).val()=="octagon"){
+    }else if($(this).val()==8){
         mark+=12.5;
       
     }

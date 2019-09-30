@@ -23,6 +23,18 @@ p {
   height: 479px;
 }
 
+
 .active > p > strong {
 color: white !important;
 }
+
+text:focus{
+ outline: "none";
+  
+}
+
+
+g:focus{
+  outline: "none";
+   
+ }
