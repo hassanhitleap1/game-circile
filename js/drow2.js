@@ -4,9 +4,12 @@ var height =window.screen.height;
 var width= window.screen.width;
 
 let sizeCiracle=caculateSizeCiracle(height,width,35);
-
+sizeCiracle=20;
 let distx=sizeDistX(80,height);
 let disty=sizeDistY(70,width);
+
+distx=80;
+disty=35;
 
 let stroke_width=2;
 
@@ -177,13 +180,14 @@ $("svg").mouseup(function(event) {
     }
 
   
-    console.log(pointsArray);
+  
 
     if(numberQustion==3){
     
         secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint);  
 
     }else if(numberQustion==4){
+        
         tharedQuestion(ponitsTheardAnswer,pointsArray);
     }
    
@@ -369,7 +373,7 @@ nodesfrom.circle(sizeCiracle).fill("#036fe2");
 
 
 function firstQuestionPartOne(ponitsFirstAnswer,pointsArray){
-    console.log("thared",pointsArray)
+    
     var nodeTrue=0;
     for (let index = 0; index < pointsArray.length; index++) {
         
@@ -463,7 +467,7 @@ function firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p,tempArrayforSecoun
 
 function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
     var nodeTrue=0;
-    console.log("pointsArray",pointsArray);
+    
     for (let index = 0; index < pointsArray.length; index++) {
         
         if(
@@ -475,7 +479,7 @@ function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
             nodeTrue++;
             if(nodeTrue==5){
     
-                console.log(nodeTrue);
+                
                 
                 if(
                     ((pointsArray[pointsArray.length-1][0]==hafPoint[0][0])  && 
@@ -487,7 +491,7 @@ function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
                 )
                 {
                     answerSecound=true;
-                    console.log("answerSecound",answerSecound)
+                    
                     mark+=25;
                     pointsArray.length=0;
                     activeQustion(numberQustion++);
@@ -511,7 +515,7 @@ function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
 
 
 function tharedQuestion(ponitsTheardAnswer,pointsArray){
-    console.log("pointsArray",pointsArray)
+  
     
     if(! pointsArray[0][0]==0 && pointsArray[0][1]==0){
         return false
@@ -525,18 +529,21 @@ function tharedQuestion(ponitsTheardAnswer,pointsArray){
     ){
      
         if(pointsArray[2][0]==2 && pointsArray[2][1]==2){
-            if(pointsArray.length==5){+
-              
-                console.log("thared",pointsArray)
+            if(pointsArray.length==5){
                 mark+=25;
-                console.log("mark",mark);
                 showMessge(mark)
                 return true;
             }
         }
 
     }
-    
+    console.log("pointsArray.length",pointsArray.length)
+    if(pointsArray.length > 5){
+        
+        showMessge(mark)
+        return false;   
+    }
+
     
     return false;
 }
@@ -545,7 +552,7 @@ function inNode(ponitsFirstAnswer,arr){
 
     for (let index = 0; index < ponitsFirstAnswer.length; index++) {
         if(ponitsFirstAnswer[index][0]==arr[0] && ponitsFirstAnswer[index][1]==arr[1] ){
-            console.log("arr in node",arr)
+          
             return true;
         }
         
@@ -557,7 +564,9 @@ function inNode(ponitsFirstAnswer,arr){
 
 
 
-$("#first_answer").change(function(event) {
+$("#first_answer").change(function(e) {
+    console.log("e.target.tagName",e.target.tagName);
+    
     answerOnePartOne= firstQuestionPartOne(ponitsFirstAnswer,pointsArray);
     
     if(answerOnePartOne){
@@ -569,8 +578,7 @@ $("#first_answer").change(function(event) {
     }else if($(this).val()=="octagon"){
         mark+=12.5;
     }
-    console.log("firstQuestionPartOne",firstQuestionPartOne);
-    console.log("mark",mark);
+  
 
     pointsArray.length=0;
     tempArrayforSecoundQustion.length=0;
@@ -579,7 +587,10 @@ $("#first_answer").change(function(event) {
 });
 
 
-$("#secound_answer").change(function(event) {
+$("#secound_answer").change(function(e) {
+
+    if(e.target.tagName !== "SELECT") return;
+
     answerOnePartTwo= firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p,tempArrayforSecoundQustion);
     if(answerOnePartTwo ){
         mark+=12.5;
@@ -590,8 +601,7 @@ $("#secound_answer").change(function(event) {
         mark+=12.5;
       
     }
-    console.log("answerOnePartTwo",answerOnePartTwo)
-    console.log("mark",mark)
+
     activeQustion(numberQustion++);
     pointsArray.length=0;
     tempArrayforSecoundQustion.length=0;
@@ -600,7 +610,7 @@ $("#secound_answer").change(function(event) {
 
 
 function activeQustion(numberQustion){
-    console.log("numberQustion",numberQustion)
+    
     $(".list-group-item").removeClass("active");
     $($(".list-group-item")[numberQustion]).addClass("active");
 }
@@ -657,3 +667,28 @@ $(document).ready(function () {
 });
 
 
+$(".list-group-item").click(function (e) { 
+   
+    if(!(e.target.tagName == "P" || e.target.tagName == "LI")){
+        if(e.target.tagName =="STRONG"){
+            if($(event.target).parent().parent().attr("id") != 4)
+                return;  
+        }else{
+            return;
+        }
+       
+    }else if( $(event.target).parent().attr("id") != 4){
+        return;
+    }
+
+    var id=this.id;      
+    numberQustion=id; 
+    activeQustionById(id);
+});
+
+function activeQustionById(id){
+    numberQustion=id;
+    pointsArray.length=0;
+    $(".list-group-item").removeClass("active");
+    $("#"+id).addClass("active");
+}
