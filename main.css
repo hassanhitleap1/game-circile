@@ -28,13 +28,59 @@ p {
 color: white !important;
 }
 
+
+
+
 text:focus{
- outline: "none";
+ outline: "none"  !important;
   
 }
 
 
 g:focus{
-  outline: "none";
+  outline: "none"  !important;
+   
+ }
+
+
+*:focus{
+  outline: "none"  !important;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+} 
+
+*:hover{
+  outline: "none"  !important;
+  outline: 0;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+} 
+
+svg{
+  outline: "none"  !important;
+} 
+
+
+svg:focus{
+  outline: "none"  !important;
+} 
+
+svg:hover{
+  outline: "none"  !important;
+} 
+
+*{
+  outline: "none"  !important;;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+} 
+
+
+
+ text:hover{
+  outline: "none"  !important;;
    
  }

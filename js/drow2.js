@@ -172,11 +172,13 @@ $("svg").mouseup(function(event) {
         }   
 
     } catch (error) {
-        shapes[index].draw('cancel', event);   
+
+        console.log(error);
     }
 
   
-  
+    console.log(pointsArray);
+
     if(numberQustion==3){
     
         secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint);  
@@ -404,26 +406,53 @@ function firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p,tempArrayforSecoun
     }
 
     pointsArray = pointsArray.filter(function(item) {
-        if(!(item[0] == p[0] && item[1] == p[1])){
+        if((item[0] != p[0] || item[1] != p[1])){
             return item;
         }
     });
 
     pointsArray = pointsArray.filter(function(item) {
-        for (let index = 0; index < ponitsFirstAnswer.length; index++) {
-       
-            if( !
-                item[0]==ponitsFirstAnswer[index][0]
-                  &&
-                  item[1]==ponitsFirstAnswer[index][1]
-              )
-              {
-                 return item;
-              
-              }
+        if((item[0] != ponitsFirstAnswer[0][0] || item[1] != ponitsFirstAnswer[0][1])){
+            return item;
         }
-
     });
+
+    pointsArray = pointsArray.filter(function(item) {
+        if((item[0] != ponitsFirstAnswer[1][0] || item[1] != ponitsFirstAnswer[1][1])){
+            return item;
+        }
+    });
+    pointsArray = pointsArray.filter(function(item) {
+        if((item[0] != ponitsFirstAnswer[2][0] || item[1] != ponitsFirstAnswer[2][1])){
+            return item;
+        }
+    });
+    pointsArray = pointsArray.filter(function(item) {
+        if((item[0] != ponitsFirstAnswer[3][0] || item[1] != ponitsFirstAnswer[3][1])){
+            return item;
+        }
+    });
+    pointsArray = pointsArray.filter(function(item) {
+        if((item[0] != ponitsFirstAnswer[4][0] || item[1] != ponitsFirstAnswer[4][1])){
+            return item;
+        }
+    });
+    pointsArray = pointsArray.filter(function(item) {
+        if((item[0] != ponitsFirstAnswer[5][0] || item[1] != ponitsFirstAnswer[5][1])){
+            return item;
+        }
+    });
+    pointsArray = pointsArray.filter(function(item) {
+        if((item[0] != ponitsFirstAnswer[6][0] || item[1] != ponitsFirstAnswer[6][1])){
+            return item;
+        }
+    });
+    pointsArray = pointsArray.filter(function(item) {
+        if((item[0] != ponitsFirstAnswer[7][0] || item[1] != ponitsFirstAnswer[7][1])){
+            return item;
+        }
+    });
+
 
     if(pointsArray.length==0){
         return true;
@@ -501,6 +530,7 @@ function tharedQuestion(ponitsTheardAnswer,pointsArray){
                 console.log("thared",pointsArray)
                 mark+=25;
                 console.log("mark",mark);
+                showMessge(mark)
                 return true;
             }
         }
@@ -575,5 +605,55 @@ function activeQustion(numberQustion){
     $($(".list-group-item")[numberQustion]).addClass("active");
 }
 
+
+
+function showMessge(per){
+
+    /// WHEN EMAOT marks 
+
+    clearInterval(SetTimerScorm);
+    SetTimerScorm=null;
+    Result='unknown';
+    mark=0;
+    if(per<=100 && per>=80){
+        window.parent.showBookMsg("Well done","<span style='display: block;font-size: 2vmin;'>نتيجتك هي</span ><span style='font-size: 2vmin;font-weight: bold;'>%"+per+"</span>",window.parent.$('iframe[src="'+window.location.href+'"]').closest(".element").attr("id"));
+        Result='passed';
+    }else if (per<=79 && per>=50) {
+        window.parent.showBookMsg("good","<span style='display: block;font-size: 2vmin;'>نتيجتك هي</span ><span style='font-size: 2vmin;font-weight: bold;'>%"+per+"</span>",window.parent.$('iframe[src="'+window.location.href+'"]').closest(".element").attr("id"));
+        Result='passed';
+    }else {
+        window.parent.showBookMsg("Try again","<span style='display: block;font-size: 2vmin;'>نتيجتك هي</span ><span style='font-size: 2vmin;font-weight: bold;'>%"+per+"</span>",window.parent.$('iframe[src="'+window.location.href+'"]').closest(".element").attr("id"));
+        Result='failed';
+    }
+  
+
+if(LMSStatus){
+    API.SetValue("cmi.score.raw",per.toFixed(2));//return text true or false | to set student mark
+    API.SetValue("cmi.completion_status","completed");//when complete game
+    API.SetValue("cmi.success_status",Result);//when complete game set value to one of ("passed","failed","unknown")
+    API.SetValue("cmi.session_time",TimeScorm);//to set Amount of seconds that the learner has spent
+    API.Commit("");//return text true or false | to save student mark to DB
+    }
+    TimeScorm=0;
+    
+
+    
+
+}
+
+
+
+
+$(document).ready(function () {
+    //scorm
+   GetAPI(window);
+   if(API!=null){
+       if(API.Initialize("")){
+           LMSStatus=true;
+           API.SetValue("cmi.score.min",0);//to set min score in the game
+           API.SetValue("cmi.score.max",100);//to set max score in the game
+       }
+   }
+});
 
 

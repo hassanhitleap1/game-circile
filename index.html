@@ -13,6 +13,7 @@
       <script
          src="js/lib/jquery-3.3.1.js"></script>
       <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+      <script src="https://manhal.com/js/scorm.js"></script>
       <script src="main.js"></script>
 
       <!-- svg.js -->
@@ -20,9 +21,10 @@
       <script src="js/svg.connectable.js"></script>
       <script src="js/svg.draggy.js"></script>
    </head>
-   <body >
+   <body onunload="disconnetLMS();">
       <div class="wrapper" >
         <div class="row">
+           
             <div class="col-md-4">
                <ul>
                      <li class="list-group-item active"> 
