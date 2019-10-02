@@ -375,28 +375,35 @@ nodesfrom.circle(sizeCiracle).fill("#036fe2");
 function firstQuestionPartOne(ponitsFirstAnswer,pointsArray){
     
     var nodeTrue=0;
-    for (let index = 0; index < pointsArray.length; index++) {
+    try {
+        for (let index = 0; index < pointsArray.length; index++) {
         
-        if(
-            (pointsArray[index][0]==ponitsFirstAnswer[index][0])  
-            && 
-            (pointsArray[index][1]==ponitsFirstAnswer[index][1])
-        )
-        {
-            nodeTrue++;
-          
+            if(
+                (pointsArray[index][0]==ponitsFirstAnswer[index][0])  
+                && 
+                (pointsArray[index][1]==ponitsFirstAnswer[index][1])
+            )
+            {
+                nodeTrue++;
+              
+            }
+         
         }
      
+            if(nodeTrue==9){
+                
+                return true;
+            }
+         
+    
+    
+         return false;
+        
+    } catch (error) {
+     console.log(error);
+        
     }
- 
-        if(nodeTrue==9){
-            
-            return true;
-        }
-     
 
-
-     return false;
     
    
 }
