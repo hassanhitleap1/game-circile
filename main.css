@@ -19,7 +19,9 @@ strong{
   width: 30%;
 
 }
-
+ul{
+  width: 88%;
+}
 
 p {
   
@@ -50,6 +52,7 @@ text:focus{
   margin-top: 18px;
   margin-left: -18px;
   padding: 2px;
+  border-radius: 5px;
 }
 
 

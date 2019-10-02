@@ -3,13 +3,13 @@
 var height =window.screen.height;
 var width= window.screen.width;
 
-let sizeCiracle=caculateSizeCiracle(height,width,35);
-sizeCiracle=20;
-let distx=sizeDistX(80,height);
-let disty=sizeDistY(70,width);
+// let sizeCiracle=caculateSizeCiracle(height,width,35);
+let sizeCiracle=17;
+// let distx=sizeDistX(80,height);
+// let disty=sizeDistY(70,width);
 
-distx=80;
-disty=35;
+let distx=31;
+let disty=30;
 
 let stroke_width=2;
 
