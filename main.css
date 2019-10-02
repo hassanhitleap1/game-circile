@@ -1,5 +1,6 @@
 body{
   overflow: hidden;
+  margin: 0;
 }
   
 .graph{
@@ -8,32 +9,47 @@ body{
    
 }
 
-.wrapper{
-  margin: 20px;
-}
 
 strong{
-  color : #61b2f9
+  color : #61b2f9;
 }
+
+.selectpicker{
+  
+  width: 30%;
+
+}
+
 
 p {
-  font-size: 22px;
+  
+  font-size: 20px;
+  margin: 6px 6px;
 }
 .div-svg{
-  height: 479px;
+  width: 49.736%;
+  height: 389px;
+  /* height: 93.8%; */
+  /* position: absolute; */
+  margin-top: 14px;
 }
 
 
-.active > p > strong {
-color: white !important;
+.active > p > strong {color: white !important;}
+
+.active{
+  background: #11b1ef;
 }
-
-
 
 
 text:focus{
  outline: "none"  !important;
   
+}
+.list-group-item {
+  margin-top: 18px;
+  margin-left: -18px;
+  padding: 2px;
 }
 
 
@@ -84,3 +100,13 @@ svg:hover{
   outline: "none"  !important;;
    
  }
+
+ .col{
+  
+   float: left;
+ }
+ .qution{
+  width: 50.124%;
+  height: 100%;
+ }
+ 

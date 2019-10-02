@@ -6,7 +6,6 @@
       <title>Page Title</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
      
       <script
          src="js/lib/jquery-3.3.1.js"></script>
@@ -21,66 +20,64 @@
    </head>
    <body onunload="disconnetLMS();">
       <div class="wrapper" >
-        <div class="row">
-           
-            <div class="col-md-4 col-sm-12 col-xs-12 ">
-               <ul>
-                     <li class="list-group-item active" id="1"> 
-                           <p>join the points 
-                              <strong>A , B , C , D , E , F , G , H , A </strong>
-                           </p>
-                           <p>
+            <div class="col qution">
+                  <ul>
+                        <li class="list-group-item active" id="1"> 
+                              <p>join the points 
+                                 <strong>A , B , C , D , E , F , G , H , A </strong>
+                              </p>
+                              <p>
+                                 
+                               <!--Blue select-->
+                               <select class="selectpicker" id="first_answer"> 
+                                    <option value=""></option>
+                                    <option value="square">square</option>
+                                    <option value="triangle">triangle</option>
+                                    <option value="octagon">octagon</option>
+                                  </select>
+         
+                              </p>
+                           </li>
+                           <li class="list-group-item " id="2">
+                              <p>join the points with each of the point 
+                                       <strong>A , B , C , D , E , F , G , H  </strong> you can get
+                                       <select class="selectpicker" id="secound_answer">
+                                             <option value=""></option>
+                                             <option value=7>7</option>
+                                             <option value=10>10</option>
+                                             <option value=6>6</option>
+                                             <option value=8> 8</option>
+                                             <option value=9>9</option>
+                                           </select>
+                                           triangles
+                                    </p>
+         
                               
-                            <!--Blue select-->
-                            <select class="selectpicker" id="first_answer"> 
-                                 <option value=""></option>
-                                 <option value="square">square</option>
-                                 <option value="triangle">triangle</option>
-                                 <option value="octagon">octagon</option>
-                               </select>
-      
-                           </p>
-                        </li>
-                        <li class="list-group-item " id="2">
-                           <p>join the points with each of the point 
-                                    <strong>A , B , C , D , E , F , G , H  </strong> you can get
-                                    <select class="selectpicker" id="secound_answer">
-                                          <option value=""></option>
-                                          <option value=7>7</option>
-                                          <option value=10>10</option>
-                                          <option value=6>6</option>
-                                          <option value=8> 8</option>
-                                          <option value=9>9</option>
-                                        </select>
-                                        triangles
-                                 </p>
-      
-                           
-                        </li>
-                        <li class="list-group-item " id="3">
-                              <p>Drwo the line 
-                                    <strong>rtriangle K L M N </strong> to get<strong> 2</strong>  square
-                                  
-                                        triangles
-                                 </p>
-                        </li>
-                        <li class="list-group-item " id="4">      
-                           <p>Drwo a shap like <strong>W X Y Z</strong> using dots in the figure.
-                            
-                                  triangles
-                           </p>
-                        </li>
-               </ul>
-                
-            </div>
-            <div class="col-md-8 col-sm-12 col-xs-12 div-svg"><svg class="graph" id="drawing"></svg></div>
-        </div>
+                           </li>
+                           <li class="list-group-item " id="3">
+                                 <p>Drwo the line 
+                                       <strong>rtriangle K L M N </strong> to get<strong> 2</strong>  square
+                                     
+                                           triangles
+                                    </p>
+                           </li>
+                           <li class="list-group-item " id="4">      
+                              <p>Drwo a shap like <strong>W X Y Z</strong> using dots in the figure.
+                               
+                                     triangles
+                              </p>
+                           </li>
+                  </ul>
+                   
+               </div>
+               <div class="col div-svg">
+                  <svg class="graph" id="drawing"></svg>
+               </div>
       </div>
       <script src="js/drow2.js"></script>
       <script src="js/TouchPunch.js"></script>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
    </body>
 </html>
 
