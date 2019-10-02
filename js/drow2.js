@@ -692,3 +692,19 @@ function activeQustionById(id){
     $(".list-group-item").removeClass("active");
     $("#"+id).addClass("active");
 }
+function replyGame(){
+    $("#first_answer").val("");
+    $("#secound_answer").val("");
+    $( "polyline" ).remove();
+    answerOnePartOne=false;
+    answerOnePartTwo=false;
+    answerSecound=false;
+    answerThared=false;
+    id=1;
+    mark=0;
+    numberQustion=1;
+    pointsArray.length=0;
+    tempArrayforSecoundQustion.length=0;
+    activeQustionById(id);
+
+}
