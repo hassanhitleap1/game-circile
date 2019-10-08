@@ -299,21 +299,10 @@ $("svg").mouseup(function(event) {
                 yDireaction=parseInt(elRghit.parentElement.getAttribute('y'));
             }
 
-        if(pointsArray.length==0){
-            pointsArray.push(temp);
-            pointsArray.push([xDireaction,yDireaction]);
-        }else{
-            if(pointsArray[pointsArray.length-1][0]==temp[0] && pointsArray[pointsArray.length-1][1]==temp[1] ){
-                pointsArray.push([xDireaction,yDireaction]);
-            }else{
-                pointsArray.push(temp);
-                pointsArray.push([xDireaction,yDireaction]);
-            }
+        pushArrayPoint(temp,[xDireaction,yDireaction],allpoint,links,markers,pointsArray);
+     
 
-
-        }
-
-        drowPath(temp,[xDireaction,yDireaction],allpoint,links,markers,tryError,pointsArray);
+        drowPath(temp,[xDireaction,yDireaction],allpoint,links,markers,pointsArray);
 
 
         }else{
@@ -532,6 +521,7 @@ function tharedQuestion(ponitsTheardAnswer,pointsArray){
         if(pointsArray[2][0]==2 && pointsArray[2][1]==2){
             if(pointsArray.length==5){
                 mark+=25;
+                mark=mark-tryError;
                 showMessge(mark)
                 return true;
             }
@@ -540,7 +530,7 @@ function tharedQuestion(ponitsTheardAnswer,pointsArray){
     }
     console.log("pointsArray.length",pointsArray.length)
     if(pointsArray.length > 5){
-
+        mark=mark-tryError;
         showMessge(mark)
         return false;
     }
@@ -658,7 +648,7 @@ if(LMSStatus){
 
 }
 
-function drowPath(temp,pointUp,allpoint,links,markers,tryError,pointsArray){
+function drowPath(temp,pointUp,allpoint,links,markers,pointsArray){
 
    let tempTrue=false;
    let pointUpTrue=false;
@@ -685,7 +675,7 @@ function drowPath(temp,pointUp,allpoint,links,markers,tryError,pointsArray){
           markers: markers
       }, eval("node"+nodePointUp)).setLineColor("#5D4037");
   }else {
-    tryError+=1
+   
   }
 
 
@@ -745,6 +735,59 @@ function replyGame(){
     numberQustion=1;
     pointsArray.length=0;
     tempArrayforSecoundQustion.length=0;
+    tryError=0;
     activeQustionById(id);
 
+}
+
+
+function pushArrayPoint(temp,pointUp,allpoint,links,markers,pointsArray){
+    
+    let tempTrue=false;
+   let pointUpTrue=false;
+   let nodeTemp=null;
+   let nodePointUp=null;
+  if(pointUp[0]==temp[0] && pointUp[1]==temp[1]){
+    tryError+=1
+    return ;
+  }
+
+    for (var i = 0; i < allpoint.length; i++) {
+        if((allpoint[i][0]==temp[0] && allpoint[i][1]==temp[1]) && tempTrue==false){
+              nodeTemp=allpoint[i][2];
+            
+        }
+        if((allpoint[i][0]==pointUp[0] && allpoint[i][1]==pointUp[1]) && pointUpTrue==false){
+            nodePointUp=allpoint[i][2];
+            
+        }
+    }
+
+
+
+ if(nodeTemp != null && nodePointUp != null){
+ 
+    if(pointsArray.length==0){
+        pointsArray.push(temp);
+        pointsArray.push([pointUp[0],pointUp[1]]);
+       
+    }else{
+        if(pointsArray[pointsArray.length-1][0]==temp[0] && pointsArray[pointsArray.length-1][1]==temp[1] ){
+            pointsArray.push([pointUp[0],pointUp[1]]);
+        }else{
+            pointsArray.push(temp);
+            pointsArray.push([pointUp[0],pointUp[1]]);
+        }
+
+
+    }
+
+  }else {
+    tryError=tryError+5;
+    console.log("tryError",tryError);
+  }
+
+
+
+    
 }
