@@ -237,7 +237,7 @@ function drowNods(distx,disty,sizeCiracle) {
         for (let j = 0; j < 13; j++) {
 
             var g = nodes.group().translate(x, y);
-                    g.circle(sizeCiracle).fill("#437b11");
+                    g.circle(sizeCiracle).fill("#6b6b6b");
                     $("#" + g).addClass("g-node");
                     $("#" + g).attr("x", i);
                     $("#" + g).attr("y", j);
@@ -273,13 +273,19 @@ const getDrawObject = () => {
 
 
 $("#drawing >> g[x]" ).mousedown(function() {
-    const shape = getDrawObject();
-      shapes[index] = shape;
-      shape.draw(event);
-      xDireaction=parseInt($(this).attr('x'));
-      yDireaction=parseInt($(this).attr('y'));
-      temp=[xDireaction,yDireaction];
-      tempArrayforSecoundQustion.push(temp);
+      try {
+        const shape = getDrawObject();
+        shapes[index] = shape;
+        shape.draw(event);
+        xDireaction=parseInt($(this).attr('x'));
+        yDireaction=parseInt($(this).attr('y'));
+        temp=[xDireaction,yDireaction];
+        tempArrayforSecoundQustion.push(temp); 
+      } catch (error) {
+          console.log("error",error);
+          
+      }
+    
 });
 
 
@@ -291,6 +297,7 @@ $("svg").mouseup(function(event) {
     try {
         if(elLeft.tagName=="circle" || elRghit.tagName=="circle"){
             shapes[index].draw('cancel', event);
+
             if(elLeft.tagName=="circle"){
                 xDireaction=parseInt(elLeft.parentElement.getAttribute('x'));
                 yDireaction=parseInt(elLeft.parentElement.getAttribute('y'));
@@ -298,11 +305,39 @@ $("svg").mouseup(function(event) {
                 xDireaction=parseInt(elRghit.parentElement.getAttribute('x'));
                 yDireaction=parseInt(elRghit.parentElement.getAttribute('y'));
             }
+            if(shapes[index]!='undefined'){
+                if(numberQustion==1){
 
-        pushArrayPoint(temp,[xDireaction,yDireaction],allpoint,links,markers,pointsArray);
-     
-
-        drowPath(temp,[xDireaction,yDireaction],allpoint,links,markers,pointsArray);
+                    pushArrayPoint(temp,[xDireaction,yDireaction],ponitsFirstAnswer,links,markers,pointsArray);
+                    drowPath(temp,[xDireaction,yDireaction],ponitsFirstAnswer,links,markers,pointsArray);
+                    console.log("tryError",tryError)
+            
+                }else if(numberQustion==2){
+                    points=ponitsFirstAnswer;
+                    points.push(p);
+                    
+                    pushArrayPoint(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                    drowPath(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                    console.log("tryError",tryError)
+            
+                }else if(numberQustion==3){
+                    points=ponitsSecoundAnswer;
+                    points.push(haffive);
+                    points.push(hafsex);
+                    pushArrayPoint(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                    drowPath(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                    secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint);
+                    console.log("tryError",tryError)
+            
+                }else if(numberQustion==4){
+                    points=[hafone,haftwo,hafthree,haffour];
+                    pushArrayPoint(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                    drowPath(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                    tharedQuestion(ponitsTheardAnswer,pointsArray,tryError);
+                    console.log("tryError",tryError)
+                }
+            }
+          
 
 
         }else{
@@ -313,21 +348,8 @@ $("svg").mouseup(function(event) {
 
         console.log(error);
     }
+    
 
-    if(numberQustion==1){
-        //firstQuestionPartOne(ponitsFirstAnswer,pointsArray,tryError);
-    }else if(numberQustion==2){
-
-        // secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint);
-
-    }else if(numberQustion==3){
-
-        secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint);
-
-    }else if(numberQustion==4){
-
-        tharedQuestion(ponitsTheardAnswer,pointsArray);
-    }
 
 });
 
@@ -504,7 +526,7 @@ function secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint){
 
 
 
-function tharedQuestion(ponitsTheardAnswer,pointsArray){
+function tharedQuestion(ponitsTheardAnswer,pointsArray,tryError){
 
 
     if(! pointsArray[0][0]==0 && pointsArray[0][1]==0){
@@ -528,8 +550,8 @@ function tharedQuestion(ponitsTheardAnswer,pointsArray){
         }
 
     }
-    console.log("pointsArray.length",pointsArray.length)
-    if(pointsArray.length > 5){
+  
+    if(pointsArray.length > 5 || tryError > 10){
         mark=mark-tryError;
         showMessge(mark)
         return false;
@@ -570,7 +592,7 @@ $("#first_answer").change(function(e) {
         mark+=12.5;
     }
 
-    $(this).prop('disabled', true);
+    // $(this).prop('disabled', true);
     pointsArray.length=0;
     tempArrayforSecoundQustion.length=0;
     if(numberQustion==1){
@@ -584,9 +606,9 @@ $("#first_answer").change(function(e) {
 $("#secound_answer").change(function(e) {
 
     if(e.target.tagName !== "SELECT") return;
-
+    
     answerOnePartTwo= firstQuestionPartTwo(ponitsFirstAnswer,pointsArray,p,tempArrayforSecoundQustion);
-    if(answerOnePartTwo ){
+    if(answerOnePartTwo){
         mark+=12.5;
         if($(this).val()==8 ){
             mark+=12.5;
@@ -601,7 +623,7 @@ $("#secound_answer").change(function(e) {
 
     pointsArray.length=0;
     tempArrayforSecoundQustion.length=0;
-      $(this).prop('disabled', true);
+    //   $(this).prop('disabled', true);
 });
 
 
@@ -721,6 +743,8 @@ function activeQustionById(id){
     $(".list-group-item").removeClass("active");
     $("#"+id).addClass("active");
 }
+
+
 function replyGame(){
     $("#first_answer").val("");
     $("#secound_answer").val("");
@@ -748,9 +772,17 @@ function pushArrayPoint(temp,pointUp,allpoint,links,markers,pointsArray){
    let nodeTemp=null;
    let nodePointUp=null;
   if(pointUp[0]==temp[0] && pointUp[1]==temp[1]){
-    tryError+=1
+    tryError+=1;
+    temp=[];
     return ;
   }
+  if(temp.length==0){
+      return false;
+  }
+  if(pointUp.length==0){
+    return false;
+  }
+  
 
     for (var i = 0; i < allpoint.length; i++) {
         if((allpoint[i][0]==temp[0] && allpoint[i][1]==temp[1]) && tempTrue==false){
@@ -783,11 +815,16 @@ function pushArrayPoint(temp,pointUp,allpoint,links,markers,pointsArray){
     }
 
   }else {
-    tryError=tryError+5;
+    tryError=tryError+2;
+    console.log("tryError",tryError)
+    if(tryError > 18 ){
+        showMessge(mark)
+        return false;
+    }
     console.log("tryError",tryError);
   }
 
-
+ 
 
     
 }
