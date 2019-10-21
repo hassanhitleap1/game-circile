@@ -338,9 +338,10 @@ $("svg").mouseup(function(event) {
                 }
             }
           
-
+            temp=[];
 
         }else{
+            temp=[];
             shapes[index].draw('cancel', event);
         }
 
