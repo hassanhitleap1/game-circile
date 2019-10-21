@@ -645,13 +645,13 @@ function showMessge(per){
     Result='unknown';
     mark=0;
     if(per<=100 && per>=80){
-        window.parent.showBookMsg("Well done","<span style='display: block;font-size: 2vmin;'>نتيجتك هي</span ><span style='font-size: 2vmin;font-weight: bold;'>%"+per+"</span>",window.parent.$('iframe[src="'+window.location.href+'"]').closest(".element").attr("id"));
+        window.parent.showBookMsg("Well done","<span style='display: block;font-size: 2vmin;'>Your result is</span ><span style='font-size: 2vmin;font-weight: bold;'>%"+per+"</span>",window.parent.$('iframe[src="'+window.location.href+'"]').closest(".element").attr("id"));
         Result='passed';
     }else if (per<=79 && per>=50) {
-        window.parent.showBookMsg("good","<span style='display: block;font-size: 2vmin;'>نتيجتك هي</span ><span style='font-size: 2vmin;font-weight: bold;'>%"+per+"</span>",window.parent.$('iframe[src="'+window.location.href+'"]').closest(".element").attr("id"));
+        window.parent.showBookMsg("Good","<span style='display: block;font-size: 2vmin;'>Your result is</span ><span style='font-size: 2vmin;font-weight: bold;'>%"+per+"</span>",window.parent.$('iframe[src="'+window.location.href+'"]').closest(".element").attr("id"));
         Result='passed';
     }else {
-        window.parent.showBookMsg("Try again","<span style='display: block;font-size: 2vmin;'>نتيجتك هي</span ><span style='font-size: 2vmin;font-weight: bold;'>%"+per+"</span>",window.parent.$('iframe[src="'+window.location.href+'"]').closest(".element").attr("id"));
+        window.parent.showBookMsg("Try again","<span style='display: block;font-size: 2vmin;'>Your result is</span ><span style='font-size: 2vmin;font-weight: bold;'>%"+per+"</span>",window.parent.$('iframe[src="'+window.location.href+'"]').closest(".element").attr("id"));
         Result='failed';
     }
 
