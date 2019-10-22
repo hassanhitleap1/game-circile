@@ -272,6 +272,96 @@ const getDrawObject = () => {
 
 
 
+
+
+$(document).on('touchstart', '#drawing >> g[x]', function(event){
+    
+    try {
+        const shape = getDrawObject();
+        shapes[index] = shape;
+        shapes[index].draw(event);
+        xDireaction=parseInt($(this).attr('x'));
+        yDireaction=parseInt($(this).attr('y'));
+        temp=[xDireaction,yDireaction];
+        tempArrayforSecoundQustion.push(temp); 
+
+      } catch (error) {
+          console.log("error",error);
+          
+      }
+
+});
+
+$(document).on('touchmove', 'svg', function(event){
+    console.log(shapes[index]);
+    shapes[index].draw(event);   
+
+});
+
+
+
+
+
+$(document).on('touchend', 'svg', function(event){
+    
+    // shapes[index].draw('cancel', event);
+    // index++;
+    try {
+        event.preventDefault(); // to avoid scrolling+
+        elemant=document.elementFromPoint(event.originalEvent.changedTouches[0].pageX, event.originalEvent.changedTouches[0].pageY);
+
+        console.log("elemant",elemant);
+        
+
+        xDireaction=parseInt(elemant.parentElement.getAttribute('x'));
+        yDireaction=parseInt(elemant.parentElement.getAttribute('y'));
+        if(!(isNaN(xDireaction)  || isNaN(yDireaction))){
+           
+            if(numberQustion==1){
+
+                pushArrayPoint(temp,[xDireaction,yDireaction],ponitsFirstAnswer,links,markers,pointsArray);
+                drowPath(temp,[xDireaction,yDireaction],ponitsFirstAnswer,links,markers,pointsArray);
+                console.log("tryError",tryError)
+        
+            }else if(numberQustion==2){
+                points=ponitsFirstAnswer;
+                points.push(p);
+                
+                pushArrayPoint(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                drowPath(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                console.log("tryError",tryError)
+        
+            }else if(numberQustion==3){
+                points=ponitsSecoundAnswer;
+                points.push(haffive);
+                points.push(hafsex);
+                pushArrayPoint(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                drowPath(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                secondQuestion(ponitsSecoundAnswer,pointsArray,hafPoint);
+                console.log("tryError",tryError)
+        
+            }else if(numberQustion==4){
+                points=[hafone,haftwo,hafthree,haffour];
+                pushArrayPoint(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                drowPath(temp,[xDireaction,yDireaction],points,links,markers,pointsArray);
+                tharedQuestion(ponitsTheardAnswer,pointsArray,tryError);
+                console.log("tryError",tryError)
+            }
+            temp=[];
+        }
+        
+    } catch (error) {
+        temp=[];
+        console.log("error",error);
+        
+    }
+   
+});
+
+
+
+
+
 $("#drawing >> g[x]" ).mousedown(function() {
       try {
         const shape = getDrawObject();
@@ -364,17 +454,6 @@ function distxFun(distx,x){
 function distyFun(disty,y){
     return y * disty;
 }
-
-
-function drowNodeCollering(nodes,distx,disty,sizeCiracle,svg,nodea,nodeb,nodec,noded,nodee,nodef,nodeg,nodeh,nodep,nodek,nodel,nodem,noden,nodew,nodex,nodey,nodez){
-
-
-
-}
-
-
-
-
 
 function firstQuestionPartOne(ponitsFirstAnswer,pointsArray,tryError){
 
