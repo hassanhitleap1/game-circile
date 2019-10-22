@@ -3,6 +3,7 @@
    <head>
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
       <title>Page Title</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- Latest compiled and minified CSS -->
@@ -18,7 +19,11 @@
       <script src="js/svg.connectable.js"></script>
       <script src="js/svg.draggy.js"></script>
    </head>
+   <script>
+      window.addEventListener("touchmove", function(event) {event.preventDefault();}, {passive: false} );
+   </script>
    <body onunload="disconnetLMS();">
+
       <div class="wrapper" >
             <div class="col qution">
                   <ul>
