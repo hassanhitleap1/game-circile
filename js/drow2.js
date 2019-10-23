@@ -279,7 +279,7 @@ $(document).on('touchstart', '#drawing >> g[x]', function(event){
     try {
         const shape = getDrawObject();
         shapes[index] = shape;
-        shapes[index].draw(event);
+        shape.draw(event.changedTouches[0]);
         xDireaction=parseInt($(this).attr('x'));
         yDireaction=parseInt($(this).attr('y'));
         temp=[xDireaction,yDireaction];
@@ -293,9 +293,10 @@ $(document).on('touchstart', '#drawing >> g[x]', function(event){
 });
 
 $(document).on('touchmove', 'svg', function(event){
-    console.log(shapes[index]);
-    shapes[index].draw(event);   
-
+   if (shape === 'mouse paint' && shapes[index]) {
+        shapes[index].draw('point', event.changedTouches[0]);
+    }
+    
 });
 
 
@@ -303,11 +304,10 @@ $(document).on('touchmove', 'svg', function(event){
 
 
 $(document).on('touchend', 'svg', function(event){
-    
-    // shapes[index].draw('cancel', event);
-    // index++;
     try {
-        event.preventDefault(); // to avoid scrolling+
+        event.preventDefault(); 
+        shapes[index].draw('cancel', event);
+        
         elemant=document.elementFromPoint(event.originalEvent.changedTouches[0].pageX, event.originalEvent.changedTouches[0].pageY);
 
         console.log("elemant",elemant);
