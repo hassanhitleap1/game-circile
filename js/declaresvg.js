@@ -14,55 +14,107 @@ var answerThared=false;
 var mark=0;
 var numberQustion=1;
 var tryError=0;
+var sizeCiracleAround=39;
 let  nodeSelector = document.getElementsByClassName("g-node");
 
 let a=[9,0,"a"];
 var nodea;
+var nodeaaround;
+
 let b=[11,2,"b"];
 let nodeb;
+let nodebaround;
+
 let c=[11,4,"c"];
 let nodec;
+let nodecaround;
+
 let d=[9,6,"d"];
 let noded;
+let nodedaround;
+
+
 let e=[6,6,"e"];
 let nodee;
+let nodeearound;
+
+
 let f=[4,4,"f"];
 let nodef;
+let nodefaround;
+
 let g=[4,2,"g"];
 let nodeg;
+let nodegaround;
+
 let h=[6,0,"h"];
 let nodeh;
+let nodeharound;
+
 let p=[8,3,"p"];
 let nodep;
+let nodeparound;
+
+
 let k=[5,9,"k"];
 let nodek;
+let nodekaround;
+
+
 let l=[5,11,"l"];
 let nodel;
+let nodelaround;
+
 let m=[1,11 ,"m"];
 let nodem;
+let nodemaround;
+
+
 let n=[1,9,"n"];
 let noden;
+let nodenaround;
+
 let x=[12,11,"x"];
 let nodex;
+let nodexaround;
+
 let y=[12,9,"y"];
 let nodey;
+let nodeyaround;
+
 let w=[10,11,"w"];
 let nodew;
+let nodewaround;
+
 let z=[10,9,"z"];
 let nodez;
+let nodezaround;
+
 
 let hafone=[0,0,"hafone"];
 let nodehafone;
+let nodehafonearound;
+
 let haftwo=[0,2,"haftwo"];
 let nodehaftwo;
+let nodehaftwoaround;
+
 let hafthree=[2,0,"hafthree"];
 let nodehafthree;
+let nodehafthreearound;
+
 let haffour=[2,2,"haffour"];
 let nodehaffour;
+let nodehaffouraround;
+
 let haffive=[3,9,"haffive"];
 let nodehaffive;
+let nodehaffivearound;
+
 let hafsex=[3,11,"hafsex"];
 let nodehafsex;
+let nodehafsexaround;
+
 
 
 
